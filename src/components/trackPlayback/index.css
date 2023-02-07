@@ -1,0 +1,18 @@
+.operation {
+  height: 200px;
+  width: 400px;
+  background: #fff;
+  position: absolute;
+  top: 24px;
+  left: 16px;
+  z-index: 1;
+  padding: 10px;
+  display: flex;
+
+  align-items: flex-start;
+  flex-direction: column;
+}
+.pro {
+  width: 380px;
+  display: block;
+}
