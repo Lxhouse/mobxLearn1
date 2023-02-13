@@ -1,7 +1,7 @@
 import { Button, Progress, Slider } from "antd";
 import { observer } from "mobx-react-lite";
 import { useRef, useState } from "react";
-import { createCar, createLine } from "../../tools/utils";
+import { createCar, createLine, createMarkersInfo } from "../../tools/utils";
 import Amap from "../Amap";
 import "./index.css";
 import Data from "./jsonData";
@@ -21,7 +21,8 @@ const TrackPlayback = ({ trackPlaBackStore }) => {
       setPlaybackProgress(
         Math.round(((e.passedPath.length + playbackStart) / Data.length) * 100)
       );
-      _mapIns.setZoomAndCenter(18, e.target.getPosition(), true);
+      // _mapIns.setCenter(e.target.getPosition());
+      // _mapIns.setZoomAndCenter(18, e.target.getPosition(), true);
     });
     carMarker.current.moveAlong(replayPath.current, {
       duration: carSpeed,
@@ -67,7 +68,12 @@ const TrackPlayback = ({ trackPlaBackStore }) => {
       autoRotation: true,
     });
   };
-
+  const drawPoint = () => {
+    const { _AMap, _mapIns } = window || {};
+    createMarkersInfo(_mapIns, _AMap, lineArr);
+    // 地图自适应缩放
+    _mapIns.setFitView();
+  };
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
       <div className="operation">
@@ -97,6 +103,7 @@ const TrackPlayback = ({ trackPlaBackStore }) => {
         >
           继续
         </Button>
+        <Button onClick={drawPoint}>画点</Button>
       </div>
       <Amap trackPlayBackStore={trackPlaBackStore}></Amap>
     </div>
