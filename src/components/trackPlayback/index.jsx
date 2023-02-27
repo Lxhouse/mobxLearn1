@@ -25,6 +25,7 @@ const TrackPlayback = ({ trackPlaBackStore }) => {
       // _mapIns.setZoomAndCenter(18, e.target.getPosition(), true);
     });
     carMarker.current.moveAlong(replayPath.current, {
+      // 持续时间
       duration: carSpeed,
       autoRotation: true,
     });
